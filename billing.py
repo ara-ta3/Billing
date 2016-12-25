@@ -13,7 +13,7 @@ def handler(event, context):
     ret = sc.api_call(
         "chat.postMessage",
         channel=channel_to_post,
-        text="今月のAWS利用費用: {} USD".format(b),
+        text="Billing in this month: {} USD".format(b),
         username="aws",
         icon_emoji=":aws:"
     )
@@ -36,3 +36,6 @@ def get_billing_in_dollars():
     )
     return metric["Datapoints"][0]["Maximum"]
 
+
+if __name__ == '__main__':
+    handler({}, {})
