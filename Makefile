@@ -48,5 +48,8 @@ lint:
 	$(ACTIVATE) pycodestyle billing.py
 	$(ACTIVATE) mypy billing.py
 
+freeze:
+	$(PIP) freeze > requirements.txt
+
 venv:
 	python3 -m venv venv
