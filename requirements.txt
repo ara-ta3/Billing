@@ -1,2 +1,4 @@
 boto3
-slackclient
+requests
+
+boto3_type_annotations

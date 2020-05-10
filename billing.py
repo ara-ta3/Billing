@@ -1,32 +1,33 @@
-from slackclient import SlackClient
 import boto3
 import os
 import datetime
+import requests
+import json
+from boto3_type_annotations.cloudwatch import Client
 
 now = datetime.datetime.now()
-slack_token = os.environ["SLACK_API_TOKEN"]
-channel_to_post = os.environ["SLACK_CHANNEL_TO_POST"]
-sc = SlackClient(slack_token)
+webhook_url = os.environ["SLACK_WEBHOOK_URL"]
+
 
 def handler(event, context):
     b = get_billing_in_dollars()
-    ret = sc.api_call(
-        "chat.postMessage",
-        channel=channel_to_post,
-        text="Billing in this month: {} USD".format(b),
-        username="aws",
-        icon_emoji=":aws:"
-    )
-    print(ret)
+    ret = requests.post(webhook_url, data=json.dumps({
+        "text": "Billing in this month: {} USD".format(b)
+    }))
     return {'text': ret}
 
-def get_billing_in_dollars():
-    cloud_watch = boto3.client('cloudwatch', region_name='us-east-1')
+
+def get_cloudwatch_client() -> Client:
+    return boto3.client('cloudwatch', region_name='us-east-1')
+
+
+def get_billing_in_dollars() -> int:
+    cloud_watch = get_cloudwatch_client()
     metric = cloud_watch.get_metric_statistics(
         Namespace="AWS/Billing",
         Dimensions=[{
-            "Name":"Currency",
-            "Value":"USD",
+            "Name": "Currency",
+            "Value": "USD",
         }],
         MetricName="EstimatedCharges",
         StartTime=now - datetime.timedelta(days=1),

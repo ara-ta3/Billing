@@ -3,6 +3,7 @@ PYTHON_RUNTIME=python3.8
 package_file_name=aws_billing.zip
 function_name=aws_billing
 iam_role=
+WEBHOOK_URL=
 
 lambda/create: package
 	$(AWS) lambda create-function \
@@ -29,6 +30,9 @@ clean:
 
 dist:
 	mkdir -p $@
+
+run/local: bin/python
+	SLACK_WEBHOOK_URL=$(WEBHOOK_URL) $< billing.py
 
 bin/pip:
 	$(MAKE) virtualenv
