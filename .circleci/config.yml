@@ -1,19 +1,22 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@0.2.1
-
 jobs:
   build-and-lint:
-    executor: python/default
+    docker: 
+      - image: circleci/python:3.8
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
-      - run:
-          command: make lint ACTIVATE=
-          name: Lint
+      - run: make venv
+      - restore_cache:
+        keys:
+        - pip-{{ checksum "requirements.txt" }}
+        - pip
+      - run: make install
+      - save_cache:
+          paths:
+            - venv/lib
+          key: pip-{{ checksum "requirements.txt" }}
+      - run: make lint
 
 workflows:
   main:
