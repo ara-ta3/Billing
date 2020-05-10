@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build-and-lint:
+    docker: 
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - run: make venv
+      - restore_cache:
+          keys:
+            - pip-{{ checksum "requirements.txt" }}
+      - run: make install
+      - save_cache:
+          paths:
+            - venv/lib
+          key: pip-{{ checksum "requirements.txt" }}
+      - run: make lint
+
+workflows:
+  main:
+    jobs:
+      - build-and-lint
