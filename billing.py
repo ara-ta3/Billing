@@ -3,25 +3,25 @@ import os
 import datetime
 import requests
 import json
-from boto3_type_annotations.cloudwatch import Client
-
-now = datetime.datetime.now()
-webhook_url = os.environ["SLACK_WEBHOOK_URL"]
+from mypy_boto3 import cloudwatch
 
 
 def handler(event, context):
-    b = get_billing_in_dollars()
+    webhook_url = os.environ["SLACK_WEBHOOK_URL"]
+
+    now = datetime.datetime.now()
+    b = get_billing_in_dollars(now)
     ret = requests.post(webhook_url, data=json.dumps({
         "text": "Billing in this month: {} USD".format(b)
     }))
     return {'text': ret}
 
 
-def get_cloudwatch_client() -> Client:
+def get_cloudwatch_client() -> cloudwatch.CloudWatchClient:
     return boto3.client('cloudwatch', region_name='us-east-1')
 
 
-def get_billing_in_dollars() -> int:
+def get_billing_in_dollars(now: datetime.datetime) -> float:
     cloud_watch = get_cloudwatch_client()
     metric = cloud_watch.get_metric_statistics(
         Namespace="AWS/Billing",

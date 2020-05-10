@@ -1,4 +1,4 @@
 boto3
 requests
 
-boto3_type_annotations
+boto3-stubs[cloudwatch]
