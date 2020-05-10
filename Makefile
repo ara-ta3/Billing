@@ -1,7 +1,7 @@
 AWS=$(shell which aws)
 PYTHON_RUNTIME=python3.8
 package_file_name=aws_billing.zip
-function_name=aws_billing
+function_name=aws-billing
 iam_role=
 WEBHOOK_URL=
 
