@@ -1,4 +1,5 @@
 AWS=$(shell which aws)
+PYTHON_RUNTIME=python3.8
 package_file_name=aws_billing.zip
 function_name=aws_billing
 iam_role=
@@ -6,7 +7,7 @@ iam_role=
 lambda/create: package
 	$(AWS) lambda create-function \
 		--function-name $(function_name) \
-		--runtime "python2.7" \
+		--runtime "$(PYTHON_RUNTIME)" \
 		--role $(iam_role) \
 		--handler aws_billing.handler \
 		--zip-file "fileb://$(package_file_name)"
@@ -18,7 +19,7 @@ lambda/update: package
 
 package: dist
 	cp billing.py $</billing.py
-	cp -r lib/python2.7/site-packages/* $</
+	cp -r lib/python3.8/site-packages/* $</
 	cd $< && zip -r ${package_file_name} ./*
 	mv -f $</$(package_file_name) ./$(package_file_name)
 
@@ -36,4 +37,4 @@ install: bin/pip
 	$< install -r requirements.txt
 
 virtualenv:
-	virtualenv -p python2 .
+	virtualenv -p python3 .
