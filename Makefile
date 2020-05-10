@@ -1,7 +1,8 @@
 AWS=aws
 PYTHON_RUNTIME=python3.8
-PYTHON=. venv/bin/activate; python
-PIP=. venv/bin/activate; pip
+ACTIVATE=. venv/bin/activate;
+PYTHON=$(ACTIVATE) python
+PIP=$(ACTIVATE) pip
 
 package_file_name=aws_billing.zip
 function_name=aws-billing
@@ -42,6 +43,13 @@ run/local:
 
 install: 
 	$(PIP) install -r requirements.txt
+
+install/dev:
+	$(PIP) install -r requirements-dev.txt
+
+lint:
+	$(ACTIVATE) pycodestyle billing.py
+	$(ACTIVATE) mypy billing.py
 
 venv:
 	python3 -m venv venv
