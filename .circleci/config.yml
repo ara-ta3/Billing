@@ -8,9 +8,8 @@ jobs:
       - checkout
       - run: make venv
       - restore_cache:
-        keys:
-        - pip-{{ checksum "requirements.txt" }}
-        - pip
+          keys:
+            - pip-{{ checksum "requirements.txt" }}
       - run: make install
       - save_cache:
           paths:
