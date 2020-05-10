@@ -9,14 +9,8 @@ jobs:
     steps:
       - checkout
       - python/load-cache
-      - python/load-cache:
-        - dependency-file: requirements-dev.txt
       - python/install-deps
-      - python/install-deps:
-        - dependency-file: requirements-dev.txt
       - python/save-cache
-      - python/save-cache:
-        - dependency-file: requirements-dev.txt
       - run:
           command: make lint
           name: Lint

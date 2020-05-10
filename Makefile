@@ -44,9 +44,6 @@ run/local:
 install: 
 	$(PIP) install -r requirements.txt
 
-install/dev:
-	$(PIP) install -r requirements-dev.txt
-
 lint:
 	$(ACTIVATE) pycodestyle billing.py
 	$(ACTIVATE) mypy billing.py
