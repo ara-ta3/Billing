@@ -14,7 +14,7 @@ def handler(event, context):
     ret = requests.post(webhook_url, data=json.dumps({
         "text": "Billing in this month: {} USD".format(b)
     }))
-    return {'text': ret}
+    return {'message': b}
 
 
 def get_cloudwatch_client() -> cloudwatch.CloudWatchClient:
