@@ -7,14 +7,7 @@ jobs:
     steps:
       - checkout
       - run: make venv
-      - restore_cache:
-          keys:
-            - pip-{{ checksum "requirements.txt" }}
       - run: make install
-      - save_cache:
-          paths:
-            - venv/lib
-          key: pip-{{ checksum "requirements.txt" }}
       - run: make lint
 
 workflows:
