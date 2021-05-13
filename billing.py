@@ -3,7 +3,7 @@ import os
 import datetime
 import requests
 import json
-from mypy_boto3 import cloudwatch
+from mypy_boto3_cloudwatch import Client as CloudWatchClient
 
 
 def handler(event, context):
@@ -17,7 +17,7 @@ def handler(event, context):
     return {'message': b}
 
 
-def get_cloudwatch_client() -> cloudwatch.CloudWatchClient:
+def get_cloudwatch_client() -> CloudWatchClient:
     return boto3.client('cloudwatch', region_name='us-east-1')
 
 
