@@ -31,10 +31,10 @@ workflows:
     jobs:
       - build-and-lint
       - deploy:
-        requires:
-          - build-and-lint
-        filters:
-          branches:
-            only: master
-        context:
-          - AWS
+          requires:
+            - build-and-lint
+          filters:
+            branches:
+              only: master
+          context:
+            - AWS
