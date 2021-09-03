@@ -9,8 +9,32 @@ jobs:
       - run: make venv
       - run: make install
       - run: make lint
+  deploy:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - run: sudo apt-get -y update
+      - run: which aws || pip install --user awscli
+      - run:
+          name: Setup AWS CLI
+          command: |
+            mkdir -p $HOME/.aws
+            echo [default] | tee -a $HOME/.aws/config
+            echo region=ap-northeast-1|tee -a $HOME/.aws/config
+      - run: make venv
+      - run: make install
+      - run: make lambda/update
 
 workflows:
   main:
     jobs:
       - build-and-lint
+      - deploy:
+        requires:
+          - build-and-test
+        filters:
+          branches:
+            only: master
+        context:
+          - AWS
