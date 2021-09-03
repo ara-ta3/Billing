@@ -24,7 +24,7 @@ jobs:
             echo region=ap-northeast-1|tee -a $HOME/.aws/config
       - run: make venv
       - run: make install
-      - run: make lambda/update
+      - run: make lambda/update > /dev/null
 
 workflows:
   main:
