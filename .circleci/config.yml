@@ -32,7 +32,7 @@ workflows:
       - build-and-lint
       - deploy:
         requires:
-          - build-and-test
+          - build-and-lint
         filters:
           branches:
             only: master
