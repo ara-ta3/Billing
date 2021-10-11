@@ -13,7 +13,7 @@ mypy==0.910
 mypy-boto3==1.18.57
 mypy-boto3-cloudwatch==1.18.57
 mypy-extensions==0.4.3
-pycodestyle==2.7.0
+pycodestyle==2.8.0
 python-dateutil==2.8.2
 requests==2.26.0
 s3transfer==0.5.0
