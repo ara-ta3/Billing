@@ -6,7 +6,7 @@ botocore-stubs==1.23.11
 certifi==2021.10.8
 chardet==4.0.0
 charset-normalizer==2.0.7
-docutils==0.18
+docutils==0.18.1
 idna==3.3
 jmespath==0.10.0
 mypy==0.910
