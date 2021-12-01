@@ -10,7 +10,7 @@ docutils==0.18.1
 idna==3.3
 jmespath==0.10.0
 mypy==0.910
-mypy-boto3==1.20.16
+mypy-boto3==1.20.17
 mypy-boto3-cloudwatch==1.20.9
 mypy-extensions==0.4.3
 pycodestyle==2.8.0
