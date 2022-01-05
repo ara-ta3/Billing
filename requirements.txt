@@ -5,7 +5,7 @@ botocore==1.21.65
 botocore-stubs==1.23.27
 certifi==2021.10.8
 chardet==4.0.0
-charset-normalizer==2.0.9
+charset-normalizer==2.0.10
 docutils==0.18.1
 idna==3.3
 jmespath==0.10.0
