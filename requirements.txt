@@ -1,7 +1,7 @@
 autopep8==1.6.0
 boto3==1.18.65
 boto3-stubs==1.20.35.post1
-botocore==1.21.65
+botocore==1.23.37
 botocore-stubs==1.23.35.post1
 certifi==2021.10.8
 chardet==4.0.0
