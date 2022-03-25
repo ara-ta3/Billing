@@ -9,7 +9,7 @@ charset-normalizer==2.0.12
 docutils==0.18.1
 idna==3.3
 jmespath==1.0.0
-mypy==0.941
+mypy==0.942
 mypy-boto3==1.21.26
 mypy-boto3-cloudwatch==1.21.23.post1
 mypy-extensions==0.4.3
