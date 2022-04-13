@@ -21,6 +21,6 @@ six==1.16.0
 toml==0.10.2
 typed-ast==1.5.2
 types-requests==2.27.16
-types-six==1.16.12
+types-six==1.16.13
 typing-extensions==4.1.1
 urllib3==1.26.9
