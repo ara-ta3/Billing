@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "timezone": "Asia/Tokyo",
+  "enabledManagers": [
+      "pip"
+  ],
+  "packageRules": [
+      {
+          "packagePatterns": ["*"],
+          "groupName": "all packages"
+      }
+  ]
+}
