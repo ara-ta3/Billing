@@ -2,6 +2,9 @@
   "extends": [
     "config:base"
   ],
+  "assignees": [
+      "ara-ta3"
+  ],
   "automerge": true,
   "timezone": "Asia/Tokyo",
   "enabledManagers": [
