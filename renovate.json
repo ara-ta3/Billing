@@ -5,7 +5,7 @@
   "automerge": true,
   "timezone": "Asia/Tokyo",
   "enabledManagers": [
-      "pip"
+      "pip_requirements"
   ],
   "packageRules": [
       {
