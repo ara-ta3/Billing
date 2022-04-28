@@ -20,7 +20,7 @@ s3transfer==0.5.2
 six==1.16.0
 toml==0.10.2
 typed-ast==1.5.3
-types-requests==2.27.22
+types-requests==2.27.23
 types-six==1.16.15
 typing-extensions==4.2.0
 urllib3==1.26.9
