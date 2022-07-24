@@ -11,7 +11,7 @@ idna==3.3
 jmespath==1.0.1
 mypy==0.971
 mypy-boto3==1.24.35
-mypy-boto3-cloudwatch==1.24.35
+mypy-boto3-cloudwatch==1.24.36.post1
 mypy-extensions==0.4.3
 pycodestyle==2.8.0
 python-dateutil==2.8.2
