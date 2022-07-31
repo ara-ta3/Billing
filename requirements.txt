@@ -2,7 +2,7 @@ autopep8==1.6.0
 boto3==1.24.42
 boto3-stubs==1.24.42
 botocore==1.27.42
-botocore-stubs==1.27.42.post2
+botocore-stubs==1.27.42.post3
 certifi==2022.6.15
 chardet==5.0.0
 charset-normalizer==2.1.0
