@@ -23,4 +23,4 @@ typed-ast==1.5.4
 types-requests==2.28.9
 types-six==1.16.18
 typing-extensions==4.3.0
-urllib3==1.26.11
+urllib3==1.26.12
