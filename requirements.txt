@@ -1,8 +1,8 @@
 autopep8==1.7.0
-boto3==1.24.57
-boto3-stubs==1.24.57
-botocore==1.27.57
-botocore-stubs==1.27.57
+boto3==1.24.58
+boto3-stubs==1.24.58
+botocore==1.27.58
+botocore-stubs==1.27.58
 certifi==2022.6.15
 chardet==5.0.0
 charset-normalizer==2.1.1
@@ -10,7 +10,7 @@ docutils==0.19
 idna==3.3
 jmespath==1.0.1
 mypy==0.971
-mypy-boto3==1.24.57
+mypy-boto3==1.24.58
 mypy-boto3-cloudwatch==1.24.55
 mypy-extensions==0.4.3
 pycodestyle==2.9.1
@@ -21,6 +21,6 @@ six==1.16.0
 toml==0.10.2
 typed-ast==1.5.4
 types-requests==2.28.9
-types-six==1.16.18
+types-six==1.16.19
 typing-extensions==4.3.0
 urllib3==1.26.12
