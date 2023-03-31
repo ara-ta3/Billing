@@ -1,6 +1,6 @@
 autopep8==2.0.2
 boto3==1.26.103
-boto3-stubs==1.26.103
+boto3-stubs==1.26.103.post1
 botocore==1.29.103
 botocore-stubs==1.29.103
 certifi==2022.12.7
@@ -10,7 +10,7 @@ docutils==0.19
 idna==3.4
 jmespath==1.0.1
 mypy==1.1.1
-mypy-boto3==1.26.103
+mypy-boto3==1.26.103.post1
 mypy-boto3-cloudwatch==1.26.99
 mypy-extensions==1.0.0
 pycodestyle==2.10.0
