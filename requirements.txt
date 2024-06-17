@@ -26,4 +26,4 @@ types-s3transfer==0.10.0
 types-six==1.16.21.9
 types-urllib3==1.26.25.14
 typing_extensions==4.8.0
-urllib3==1.26.18
+urllib3==1.26.19
