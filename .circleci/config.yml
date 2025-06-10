@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-and-lint:
     docker: 
-      - image: circleci/python:3.8
+      - image: circleci/python:3.11
     steps:
       - checkout
       - run: make venv
@@ -11,7 +11,7 @@ jobs:
       - run: make lint
   deploy:
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/python:3.11
     steps:
       - checkout
       - run: sudo apt-get -y update

@@ -1,5 +1,5 @@
 AWS=aws
-PYTHON_RUNTIME=python3.8
+PYTHON_RUNTIME=python3.11
 ACTIVATE=. venv/bin/activate;
 PYTHON=$(ACTIVATE) python
 PIP=$(ACTIVATE) pip
@@ -26,7 +26,7 @@ lambda/update: package
 
 package: dist
 	cp billing.py $</billing.py
-	cp -r venv/lib/python3.8/site-packages/* $</
+	cp -r venv/lib/python3.11/site-packages/* $</
 	cd $< && zip -r ${package_file_name} ./*
 	mv -f $</$(package_file_name) ./$(package_file_name)
 
