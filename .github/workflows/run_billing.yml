@@ -21,14 +21,13 @@ jobs:
         run: |
           curl -Ls https://astral.sh/uv/install.sh | bash
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-      - run: make install ACTIVATE=
+      - run: make venv
+      - run: make install
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
-      - name: Run billing script
+      - run: make run
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          python billing.py
 

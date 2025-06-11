@@ -4,7 +4,7 @@ UV=uv
 WEBHOOK_URL=
 
 run: 
-	SLACK_WEBHOOK_URL=$(WEBHOOK_URL) $(PYTHON) billing.py
+	$(ACTIVATE) python billing.py
 
 install: 
 	$(ACTIVATE) $(UV) sync
