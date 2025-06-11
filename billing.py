@@ -7,16 +7,6 @@ from typing import Any, Dict
 from mypy_boto3_cloudwatch import Client as CloudWatchClient
 
 
-def handler(event, context):
-    webhook_url = os.environ["SLACK_WEBHOOK_URL"]
-
-    now = datetime.datetime.now()
-    billing = get_billing_in_dollars(now)
-    payload = build_slack_payload(billing, now)
-    requests.post(webhook_url, data=json.dumps(payload))
-    return {"message": billing}
-
-
 def get_cloudwatch_client() -> CloudWatchClient:
     return boto3.client('cloudwatch', region_name='us-east-1')
 
@@ -66,4 +56,8 @@ def build_slack_payload(
 
 
 if __name__ == '__main__':
-    handler({}, {})
+    webhook_url = os.environ["SLACK_WEBHOOK_URL"]
+    now = datetime.datetime.now()
+    billing = get_billing_in_dollars(now)
+    payload = build_slack_payload(billing, now)
+    requests.post(webhook_url, data=json.dumps(payload))
