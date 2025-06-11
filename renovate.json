@@ -8,10 +8,6 @@
   ],
   "automerge": true,
   "timezone": "Asia/Tokyo",
-  "enabledManagers": [
-      "uv",
-      "github-actions"
-  ],
   "packageRules": [
       {
           "packagePatterns": ["*"],
