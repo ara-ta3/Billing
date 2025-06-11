@@ -3,6 +3,7 @@ import os
 import datetime
 import requests
 import json
+from typing import Any, Dict
 from mypy_boto3_cloudwatch import Client as CloudWatchClient
 
 
@@ -10,11 +11,10 @@ def handler(event, context):
     webhook_url = os.environ["SLACK_WEBHOOK_URL"]
 
     now = datetime.datetime.now()
-    b = get_billing_in_dollars(now)
-    ret = requests.post(webhook_url, data=json.dumps({
-        "text": "Billing in this month: {} USD".format(b)
-    }))
-    return {'message': b}
+    billing = get_billing_in_dollars(now)
+    payload = build_slack_payload(billing, now)
+    requests.post(webhook_url, data=json.dumps(payload))
+    return {"message": billing}
 
 
 def get_cloudwatch_client() -> CloudWatchClient:
@@ -36,6 +36,33 @@ def get_billing_in_dollars(now: datetime.datetime) -> float:
         Statistics=["Maximum"]
     )
     return metric["Datapoints"][0]["Maximum"]
+
+
+def build_slack_payload(
+    billing: float, now: datetime.datetime
+) -> Dict[str, Any]:
+    return {
+        "username": "AWS Billing",
+        "icon_emoji": ":money_with_wings:",
+        "attachments": [
+            {
+                "color": "#2eb886",
+                "title": "AWS Billing Update",
+                "fields": [
+                    {
+                        "title": "Date",
+                        "value": now.strftime("%Y-%m-%d"),
+                        "short": True
+                    },
+                    {
+                        "title": "Month to date",
+                        "value": f"{billing:.2f} USD",
+                        "short": True
+                    }
+                ]
+            }
+        ]
+    }
 
 
 if __name__ == '__main__':
