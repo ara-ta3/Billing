@@ -1,6 +1,7 @@
 ACTIVATE=. .venv/bin/activate;
 PYTHON=$(ACTIVATE) python
 UV=uv
+WEBHOOK_URL=
 
 run: 
 	SLACK_WEBHOOK_URL=$(WEBHOOK_URL) $(PYTHON) billing.py
