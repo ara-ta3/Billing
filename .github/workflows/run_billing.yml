@@ -17,6 +17,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-east-1
       - name: Run billing script
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
