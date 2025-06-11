@@ -1,6 +1,7 @@
 {
   "extends": [
-    "config:base"
+    "config:recommended",
+    "group:all"
   ],
   "assignees": [
       "ara-ta3"
@@ -8,7 +9,8 @@
   "automerge": true,
   "timezone": "Asia/Tokyo",
   "enabledManagers": [
-      "pip_requirements"
+      "uv",
+      "github-actions"
   ],
   "packageRules": [
       {
