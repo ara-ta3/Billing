@@ -14,4 +14,4 @@ lint:
 	$(ACTIVATE) mypy billing.py
 
 venv:
-	$(UV) venv
+	$(UV) venv --python 3.13
