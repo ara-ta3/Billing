@@ -4,13 +4,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
+from services.billing_service import BillingService
 from billing_application import BillingApplication
-from test_doubles import FakeBillingService, SpyNotificationService
+from test_doubles import FakeCloudWatchRepository, SpyNotificationService
 
 
 def test_billing_application_run():
     # Arrange
-    billing_service = FakeBillingService(billing_amount=25.75)
+    fake_repository = FakeCloudWatchRepository(billing_amount=25.75)
+    billing_service = BillingService(fake_repository)
     notification_service = SpyNotificationService()
     app = BillingApplication(billing_service, notification_service)
     test_time = datetime.datetime(2024, 1, 15, 10, 30, 0)
@@ -28,7 +30,8 @@ def test_billing_application_run():
 
 def test_billing_application_with_different_amount():
     # Arrange
-    billing_service = FakeBillingService(billing_amount=100.00)
+    fake_repository = FakeCloudWatchRepository(billing_amount=100.00)
+    billing_service = BillingService(fake_repository)
     notification_service = SpyNotificationService()
     app = BillingApplication(billing_service, notification_service)
     test_time = datetime.datetime(2024, 2, 1, 9, 0, 0)
