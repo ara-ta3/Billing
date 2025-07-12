@@ -2,7 +2,7 @@ UV=uv
 WEBHOOK_URL=
 
 run: 
-	$(UV) run python -m billing.main
+	$(UV) run python -m main
 
 install: 
 	$(UV) sync --extra dev
@@ -13,9 +13,7 @@ test:
 
 lint:
 	$(UV) run pycodestyle src/
-
-lint-type:
-	$(UV) run mypy --ignore-missing-imports src/
+	$(UV) run mypy src/
 
 lint-fix:
 	$(UV) run autopep8 --in-place --recursive src/

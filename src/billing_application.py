@@ -1,8 +1,5 @@
 import datetime
-from billing.protocols import (
-    BillingServiceProtocol,
-    NotificationServiceProtocol,
-)
+from protocols import BillingServiceProtocol, NotificationServiceProtocol
 
 
 class BillingApplication:

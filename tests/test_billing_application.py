@@ -1,6 +1,6 @@
 import datetime
-from billing.services.billing_service import BillingService
-from billing.billing_application import BillingApplication
+from services.billing_service import BillingService
+from billing_application import BillingApplication
 from .test_doubles import FakeCloudWatchRepository, SpyNotificationService
 
 
