@@ -1,31 +1,43 @@
-import boto3
 import os
 import datetime
 import requests
 import json
 from typing import Any, Dict
-from mypy_boto3_cloudwatch import Client as CloudWatchClient
-
-
-def get_cloudwatch_client() -> CloudWatchClient:
-    return boto3.client('cloudwatch', region_name='us-east-1')
+from requests_auth_aws_sigv4 import AWSSigV4
 
 
 def get_billing_in_dollars(now: datetime.datetime) -> float:
-    cloud_watch = get_cloudwatch_client()
-    metric = cloud_watch.get_metric_statistics(
-        Namespace="AWS/Billing",
-        Dimensions=[{
-            "Name": "Currency",
-            "Value": "USD",
-        }],
-        MetricName="EstimatedCharges",
-        StartTime=now - datetime.timedelta(days=1),
-        EndTime=now,
-        Period=86400,
-        Statistics=["Maximum"]
+    auth = AWSSigV4('monitoring', region='us-east-1')
+    
+    params = {
+        'Action': 'GetMetricStatistics',
+        'Version': '2010-08-01',
+        'Namespace': 'AWS/Billing',
+        'MetricName': 'EstimatedCharges',
+        'Dimensions.member.1.Name': 'Currency',
+        'Dimensions.member.1.Value': 'USD',
+        'StartTime': (now - datetime.timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+        'EndTime': now.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+        'Period': '86400',
+        'Statistics.member.1': 'Maximum'
+    }
+    
+    response = requests.post(
+        'https://monitoring.us-east-1.amazonaws.com',
+        data=params,
+        auth=auth
     )
-    return metric["Datapoints"][0]["Maximum"]
+    response.raise_for_status()
+    
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(response.text)
+    
+    for datapoint in root.findall('.//{https://monitoring.amazonaws.com/doc/2010-08-01/}Datapoint'):
+        maximum = datapoint.find('.//{https://monitoring.amazonaws.com/doc/2010-08-01/}Maximum')
+        if maximum is not None:
+            return float(maximum.text)
+    
+    raise ValueError("No billing data found")
 
 
 def build_slack_payload(
