@@ -1,9 +1,9 @@
 import os
 import datetime
-from billing.repositories.cloudwatch_repository import CloudWatchRepository
-from billing.services.billing_service import BillingService
-from billing.services.notification_service import NotificationService
-from billing.billing_application import BillingApplication
+from repositories.cloudwatch_repository import CloudWatchRepository
+from services.billing_service import BillingService
+from services.notification_service import NotificationService
+from billing_application import BillingApplication
 
 
 if __name__ == '__main__':
