@@ -5,8 +5,11 @@ run:
 	$(UV) run python -m billing.main
 
 install: 
-	$(UV) sync --dev
+	$(UV) sync --extra dev
 	$(UV) pip install -e .
+
+test:
+	$(UV) run --directory . python -m pytest tests/ -v
 
 lint:
 	$(UV) run pycodestyle src/

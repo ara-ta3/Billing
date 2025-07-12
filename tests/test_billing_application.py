@@ -1,12 +1,7 @@
 import datetime
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
-
-from services.billing_service import BillingService
-from billing_application import BillingApplication
-from test_doubles import FakeCloudWatchRepository, SpyNotificationService
+from billing.services.billing_service import BillingService
+from billing.billing_application import BillingApplication
+from .test_doubles import FakeCloudWatchRepository, SpyNotificationService
 
 
 def test_billing_application_run():
@@ -46,7 +41,3 @@ def test_billing_application_with_different_amount():
     assert notification["now"] == test_time
 
 
-if __name__ == "__main__":
-    test_billing_application_run()
-    test_billing_application_with_different_amount()
-    print("All tests passed!")
