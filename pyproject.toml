@@ -32,5 +32,5 @@ dependencies = [
     "types-six==1.16.21.9",
     "types-urllib3==1.26.25.14",
     "typing-extensions==4.8.0",
-    "urllib3==1.26.19",
+    "urllib3==2.5.0",
 ]
