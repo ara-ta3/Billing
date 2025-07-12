@@ -4,14 +4,14 @@ UV=uv
 WEBHOOK_URL=
 
 run: 
-	$(ACTIVATE) python billing.py
+	$(ACTIVATE) python main.py
 
 install: 
 	$(ACTIVATE) $(UV) sync
 
 lint:
-	$(ACTIVATE) pycodestyle billing.py
-	$(ACTIVATE) mypy billing.py
+	$(ACTIVATE) pycodestyle main.py repositories/ services/
+	$(ACTIVATE) mypy main.py repositories/ services/
 
 venv:
 	$(UV) venv --python 3.13
