@@ -2,13 +2,13 @@ import os
 import datetime
 import requests
 import json
+import xml.etree.ElementTree as ET
 from typing import Any, Dict
-from requests_auth_aws_sigv4 import AWSSigV4
+from requests_auth_aws_sigv4 import AWSSigV4  # type: ignore
 
 
 def get_billing_in_dollars(now: datetime.datetime) -> float:
     auth = AWSSigV4('monitoring', region='us-east-1')
-    
     params = {
         'Action': 'GetMetricStatistics',
         'Version': '2010-08-01',
@@ -16,27 +16,26 @@ def get_billing_in_dollars(now: datetime.datetime) -> float:
         'MetricName': 'EstimatedCharges',
         'Dimensions.member.1.Name': 'Currency',
         'Dimensions.member.1.Value': 'USD',
-        'StartTime': (now - datetime.timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+        'StartTime': (now - datetime.timedelta(days=1)).strftime(
+            '%Y-%m-%dT%H:%M:%S.%fZ'),
         'EndTime': now.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
         'Period': '86400',
         'Statistics.member.1': 'Maximum'
     }
-    
     response = requests.post(
         'https://monitoring.us-east-1.amazonaws.com',
         data=params,
         auth=auth
     )
     response.raise_for_status()
-    
-    import xml.etree.ElementTree as ET
+
     root = ET.fromstring(response.text)
-    
-    for datapoint in root.findall('.//{https://monitoring.amazonaws.com/doc/2010-08-01/}Datapoint'):
-        maximum = datapoint.find('.//{https://monitoring.amazonaws.com/doc/2010-08-01/}Maximum')
-        if maximum is not None:
+
+    ns = '{https://monitoring.amazonaws.com/doc/2010-08-01/}'
+    for datapoint in root.findall(f'.//{ns}Datapoint'):
+        maximum = datapoint.find(f'.//{ns}Maximum')
+        if maximum is not None and maximum.text is not None:
             return float(maximum.text)
-    
     raise ValueError("No billing data found")
 
 
