@@ -13,7 +13,12 @@ test:
 
 lint:
 	$(UV) run pycodestyle src/
-	$(UV) run --directory src mypy --explicit-package-bases .
+
+lint-type:
+	$(UV) run mypy --ignore-missing-imports src/
+
+lint-fix:
+	$(UV) run autopep8 --in-place --recursive src/
 
 venv:
 	$(UV) venv --python 3.13

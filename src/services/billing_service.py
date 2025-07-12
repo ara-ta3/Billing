@@ -1,6 +1,6 @@
 import datetime
-from protocols import CloudWatchRepositoryProtocol
-from repositories.cloudwatch_repository import CloudWatchRepository
+from billing.protocols import CloudWatchRepositoryProtocol
+from billing.repositories.cloudwatch_repository import CloudWatchRepository
 
 
 class BillingService:
