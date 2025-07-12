@@ -1,17 +1,19 @@
-ACTIVATE=. .venv/bin/activate;
-PYTHON=$(ACTIVATE) python
 UV=uv
 WEBHOOK_URL=
 
 run: 
-	$(ACTIVATE) python billing.py
+	$(UV) run python -m billing.main
 
 install: 
-	$(ACTIVATE) $(UV) sync
+	$(UV) sync --extra dev
+	$(UV) pip install -e .
+
+test:
+	$(UV) run --directory . python -m pytest tests/ -v
 
 lint:
-	$(ACTIVATE) pycodestyle billing.py
-	$(ACTIVATE) mypy billing.py
+	$(UV) run pycodestyle src/
+	$(UV) run --directory src mypy --explicit-package-bases .
 
 venv:
 	$(UV) venv --python 3.13
