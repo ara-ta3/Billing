@@ -4,7 +4,7 @@ UV=uv
 WEBHOOK_URL=
 
 run: 
-	$(ACTIVATE) python billing.py
+	$(PYTHON) billing.py
 
 install: 
 	$(ACTIVATE) $(UV) sync
