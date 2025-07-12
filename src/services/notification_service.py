@@ -8,7 +8,9 @@ class NotificationService:
     def __init__(self, webhook_url: str) -> None:
         self._webhook_url = webhook_url
 
-    def build_slack_payload(self, billing: float, now: datetime.datetime) -> Dict[str, Any]:
+    def build_slack_payload(
+        self, billing: float, now: datetime.datetime
+    ) -> Dict[str, Any]:
         return {
             "username": "AWS Billing",
             "icon_emoji": ":money_with_wings:",
@@ -32,6 +34,8 @@ class NotificationService:
             ]
         }
 
-    def send_notification(self, billing: float, now: datetime.datetime) -> None:
+    def send_notification(
+        self, billing: float, now: datetime.datetime
+    ) -> None:
         payload = self.build_slack_payload(billing, now)
         requests.post(self._webhook_url, data=json.dumps(payload))
